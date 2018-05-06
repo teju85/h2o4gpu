@@ -114,6 +114,11 @@ else
     PLATFORM = $(ARCH)-centos7-cpu
 endif
 
+DOCKER_ARCH=
+ifeq (${ARCH}, ppc64le)
+    DOCKER_ARCH="-ppc64le"
+endif
+
 #
 # Find NVML library
 #

@@ -171,21 +171,29 @@ buildinstall: alldeps build install
 # DOCKER TARGETS
 #########################################
 
-DOCKER_CUDA_VERSION?=9
+DOCKER_CUDA_VERSION?=9.0
 
-ifeq (${DOCKER_CUDA_VERSION},9)
-    DOCKER_CUDNN_VERSION?=7
-else
+ifeq (${DOCKER_CUDA_VERSION},8.0)
     DOCKER_CUDNN_VERSION?=5
+else
+    DOCKER_CUDNN_VERSION?=7
 endif
+
+centos7_cuda80_in_docker:
+	$(MAKE) DOCKER_CUDA_VERSION=8.0 docker-build
+
+centos7_cuda90_in_docker:
+	$(MAKE) DOCKER_CUDA_VERSION=9.0 docker-build
+
+centos7_cuda91_in_docker:
+	$(MAKE) MY_CUDA_VERSION=9.1 centos7_in_docker_impl
 
 docker-build:
 	@echo "+-- Building Wheel in Docker --+"
-	rm -rf src/interface_py/dist/*
 	export CONTAINER_NAME="local-make-build-cuda$(DOCKER_CUDA_VERSION)" ;\
 	export versionTag=$(BASE_VERSION) ;\
 	export extratag="-cuda$(DOCKER_CUDA_VERSION)" ;\
-	export dockerimage="nvidia/cuda:$(DOCKER_CUDA_VERSION).0-cudnn$(DOCKER_CUDNN_VERSION)-devel-centos7" ;\
+	export dockerimage="nvidia/cuda${DOCKER_ARCH}:$(DOCKER_CUDA_VERSION)-cudnn$(DOCKER_CUDNN_VERSION)-devel-centos7" ;\
 	bash scripts/make-docker-devel.sh
 
 docker-runtime:
@@ -194,7 +202,7 @@ docker-runtime:
 	export versionTag=$(BASE_VERSION) ;\
 	export extratag="-cuda$(DOCKER_CUDA_VERSION)" ;\
 	export fullVersionTag=$(BASE_VERSION) ;\
-	export dockerimage="nvidia/cuda:$(DOCKER_CUDA_VERSION).0-cudnn$(DOCKER_CUDNN_VERSION)-runtime-centos7" ;\
+	export dockerimage="nvidia/cuda${DOCKER_ARCH}:$(DOCKER_CUDA_VERSION)-cudnn$(DOCKER_CUDNN_VERSION)-runtime-centos7" ;\
 	bash scripts/make-docker-runtime.sh
 
 docker-runtime-run:
@@ -206,7 +214,7 @@ docker-runtests:
 	@echo "+-- Run tests in docker (-nccl-cuda9) --+"
 	export CONTAINER_NAME="localmake-runtests" ;\
 	export extratag="-cuda$(DOCKER_CUDA_VERSION)" ;\
-	export dockerimage="nvidia/cuda:$(DOCKER_CUDA_VERSION).0-cudnn$(DOCKER_CUDNN_VERSION)-devel-centos7" ;\
+	export dockerimage="nvidia/cuda${DOCKER_ARCH}:$(DOCKER_CUDA_VERSION)-cudnn$(DOCKER_CUDNN_VERSION)-devel-centos7" ;\
 	export target="dotest" ;\
 	bash scripts/make-docker-runtests.sh
 
