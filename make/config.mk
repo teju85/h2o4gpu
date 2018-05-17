@@ -109,7 +109,7 @@ DIST_DIR = dist
 
 ARCH := $(shell arch)
 ifdef CUDA_MAJOR_VERSION
-    PLATFORM = $(ARCH)-centos7-cuda$(CUDA_MAJOR_VERSION)
+    PLATFORM = $(ARCH)-centos7-cuda$(CUDA_VERSION)
 else
     PLATFORM = $(ARCH)-centos7-cpu
 endif

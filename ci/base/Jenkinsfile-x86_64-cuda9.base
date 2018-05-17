@@ -9,7 +9,7 @@ import ai.h2o.ci.BuildInfo
 def commitMessage = ''
 def h2o4gpuUtils = null
 
-def platform = "x86_64-centos7-cuda9"
+def platform = "x86_64-centos7-cuda9.0"
 def BUILDTYPE = "cuda9"
 def cuda = "nvidia/cuda:9.0-cudnn7-devel-centos7"
 def cudart = "nvidia/cuda:9.0-cudnn7-runtime-centos7"
