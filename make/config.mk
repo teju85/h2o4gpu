@@ -36,8 +36,8 @@ else
         XGBOOST_TARGET=libxgboost
     endif
     CUDA_LIB=$(CUDA_HOME)/lib64
-    CUDA_VERSION ?= $(shell ls $(CUDA_LIB)/libcudart.so.* | head -1 | rev | cut -d "." -f -2 | rev)
-    CUDA_MAJOR_VERSION = $(shell echo $(CUDA_VERSION) | cut -d "." -f 1)
+    MAKEFILE_CUDA_VERSION ?= $(shell ls $(CUDA_LIB)/libcudart.so.* | head -1 | rev | cut -d "." -f -2 | rev)
+    CUDA_MAJOR_VERSION = $(shell echo $(MAKEFILE_CUDA_VERSION) | cut -d "." -f 1)
 endif
 
 # PyDataTable version. Currently not used in the code.
@@ -109,7 +109,7 @@ DIST_DIR = dist
 
 ARCH := $(shell arch)
 ifdef CUDA_MAJOR_VERSION
-    PLATFORM = $(ARCH)-centos7-cuda$(CUDA_VERSION)
+    PLATFORM = $(ARCH)-centos7-cuda$(MAKEFILE_CUDA_VERSION)
 else
     PLATFORM = $(ARCH)-centos7-cpu
 endif
