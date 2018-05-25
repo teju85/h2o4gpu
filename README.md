@@ -14,9 +14,7 @@ Daal library added for CPU, currently supported only x86_64 architecture.
 * Install CUDA with bundled display drivers (
   [CUDA 8](https://developer.nvidia.com/cuda-downloads)
   or
-  [CUDA 9.0](https://developer.nvidia.com/cuda-release-candidate-download) )
-
-NOTE: CUDA9.1 is not currently compatible with H2O4GPU.
+  [CUDA 9](https://developer.nvidia.com/cuda-release-candidate-download) )
 
 When installing, choose to link the cuda install to /usr/local/cuda .
 Ensure to reboot after installing the new nvidia drivers.
@@ -57,7 +55,8 @@ Download the Python wheel file (For Python 3.6 on linux_x86_64):
     * [CUDA9](https://s3.amazonaws.com/h2o-release/h2o4gpu/releases/stable/ai/h2o/h2o4gpu/0.2-nccl-cuda9/h2o4gpu-0.2.0-cp36-cp36m-linux_x86_64.whl)
   * Bleeding edge (changes with every successful master branch build):
     * [CUDA8](https://s3.amazonaws.com/h2o-release/h2o4gpu/releases/bleeding-edge/ai/h2o/h2o4gpu/0.2-nccl-cuda8/h2o4gpu-0.2.0.9999-cp36-cp36m-linux_x86_64.whl)
-    * [CUDA9](https://s3.amazonaws.com/h2o-release/h2o4gpu/releases/bleeding-edge/ai/h2o/h2o4gpu/0.2-nccl-cuda9/h2o4gpu-0.2.0.9999-cp36-cp36m-linux_x86_64.whl)
+    * [CUDA9.0](https://s3.amazonaws.com/h2o-release/h2o4gpu/releases/bleeding-edge/ai/h2o/h2o4gpu/0.2-nccl-cuda90/h2o4gpu-0.2.0.9999-cp36-cp36m-linux_x86_64.whl)
+    * [CUDA9.2](https://s3.amazonaws.com/h2o-release/h2o4gpu/releases/bleeding-edge/ai/h2o/h2o4gpu/0.2-nccl-cuda92/h2o4gpu-0.2.0.9999-cp36-cp36m-linux_x86_64.whl)
   * [For Conda (unsupported and untested by H2O.ai)]
     ```
         pip install --extra-index-url https://pypi.anaconda.org/gpuopenanalytics/simple h2o4gpu

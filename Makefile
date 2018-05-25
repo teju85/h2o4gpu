@@ -185,8 +185,8 @@ centos7_cuda80_in_docker:
 centos7_cuda90_in_docker:
 	$(MAKE) DOCKER_CUDA_VERSION=9.0 docker-build
 
-centos7_cuda91_in_docker:
-	$(MAKE) DOCKER_CUDA_VERSION=9.1 docker-build
+centos7_cuda92_in_docker:
+	$(MAKE) DOCKER_CUDA_VERSION=9.2 docker-build
 
 docker-build:
 	@echo "+-- Building Wheel in Docker --+"
