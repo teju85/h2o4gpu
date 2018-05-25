@@ -15,20 +15,20 @@ import ai.h2o.ci.BuildInfo
 def commitMessage = ''
 def h2o4gpuUtils = null
 
-def platform = "x86_64-centos7-cuda9.1"
-def BUILDTYPE = "cuda91"
-def cuda = "nvidia/cuda:9.1-cudnn7-devel-centos7"
-def cudart = "nvidia/cuda:9.1-cudnn7-runtime-centos7"
-def extratag = "-cuda91"
-def linuxwheel = "x86_64-centos7-cuda91.whl"
+def platform = "ppc64le-centos7-cuda9.1"
+def BUILDTYPE = "cuda92"
+def cuda = "nvidia/cuda-ppc64le:9.2-cudnn7-devel-centos7"
+def cudart = "nvidia/cuda-ppc64le:9.2-cudnn7-runtime-centos7"
+def extratag = "-cuda92"
+def linuxwheel = "ppc64le-centos7-cuda92.whl"
 def testtype = "dotest"
-def labelbuild = "nvidia-docker"
-def labeltest = "gpu && nvidia-docker"
-def labelruntime = "nvidia-docker"
+def labelbuild = "ibm-power"
+def labeltest = "ibm-power-gpu"
+def labelruntime = "ibm-power"
 def doingbenchmark = "0"
 def dobenchmark = "0"
 def doruntime = "1"
-def data_dirs = "-v /home/0xdiag/h2o4gpu/data:/data -v /home/0xdiag/h2o4gpu/open_data:/open_data"
+def data_dirs = "-v /home/jenkins/smalldata:/smalldata -v /home/jenkins/open_data:/open_data"
 //################ BELOW IS COPY/PASTE of ci/Jenkinsfile.template (except stage names)
 def benchmark_commit_trigger
 
@@ -51,7 +51,7 @@ pipeline {
     }
 
     stages {
-        stage("Git clone on Linux x86_64-cuda91") {
+        stage("Git clone on Linux ppc64le-cuda92") {
 
             agent {
                 label "${labelbuild}"
@@ -80,7 +80,7 @@ pipeline {
                 stash includes: "ci/Jenkinsfile*", name: "jenkinsfiles"
             }
         }
-        stage("Build on Centos7 x86_64-cuda91") {
+        stage("Build on Centos7 ppc64le-cuda92") {
             agent {
                 label "${labelbuild}"
             }
@@ -122,7 +122,7 @@ pipeline {
             }
         }
 
-        stage("Test | Lint | S3up on Centos7 x86_64-cuda91") {
+        stage("Test | Lint | S3up on Centos7 ppc64le-cuda92") {
             agent {
                 label "${labeltest}"
             }
@@ -169,7 +169,7 @@ pipeline {
                 }
             }
         }
-        stage("Build/Publish Runtime Docker Centos7 x86_64-cuda91") {
+        stage("Build/Publish Runtime Docker Centos7 ppc64le-cuda92") {
             agent {
                 label "${labelruntime}"
             }
@@ -220,7 +220,7 @@ pipeline {
             }
         }
 
-        stage("Benchmarking Linux x86_64-cuda91") {
+        stage("Benchmarking Linux ppc64le-cuda92") {
             agent {
                 label 'master'
             }
