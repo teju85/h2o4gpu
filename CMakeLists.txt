@@ -139,7 +139,6 @@ if(USE_CUDA)
                 ${BLAS_LIBRARIES}
                 ${NVTX_LIBRARY}
                 ${NVML_LIBRARY})
-                )
         #============= BUILD GPU LIBRARY
 
         #============= GPU SWIG
