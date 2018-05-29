@@ -134,7 +134,9 @@ RUN bash -c 'if [ `arch` = "ppc64le" ]; then \
 	cmake -DARROW_CXXFLAGS="-lutil" -DARROW_PYTHON=on && make -j && make install && \
 	cd $HOME/arrow/python && \
 	ARROW_HOME=/usr/local python setup.py install && \
-	yum install -y libjpeg-devel; \
+	yum install -y libjpeg-devel && \
+	echo "Looking for arrow lib:" && \
+	find / -name "libarrow";\
 	fi'
 
 # Pillow
